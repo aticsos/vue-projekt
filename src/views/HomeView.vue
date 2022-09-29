@@ -62,6 +62,22 @@ export default defineComponent({
     // send the post to the "server" with a POST request
     postData: function (event: Event) {
       event.preventDefault();
+      //check if titel of id are empty
+      if (this.pst.userId == 0) {
+        this.$toast.add({
+          severity: "error",
+          summary: "pleas enter user id",
+          life: 3000,
+        });
+        return;
+      } else if (!this.pst.titel || !this.pst.titel.trim()) {
+        this.$toast.add({
+          severity: "error",
+          summary: "pleas enter title",
+          life: 3000,
+        });
+        return;
+      }
       fetch("https://jsonplaceholder.typicode.com/posts", {
         method: "POST",
         body: JSON.stringify({
@@ -90,6 +106,15 @@ export default defineComponent({
     },
     //same as postData only put insted of post and the postes id at the end of the url
     editPost: function (event: Event) {
+      //checks if titel is empty
+      if (!this.pst.titel || !this.pst.titel.trim()) {
+        this.$toast.add({
+          severity: "error",
+          summary: "pleas enter title",
+          life: 3000,
+        });
+        return;
+      }
       event.preventDefault();
       fetch("https://jsonplaceholder.typicode.com/posts/" + this.pst.id, {
         method: "PUT",
