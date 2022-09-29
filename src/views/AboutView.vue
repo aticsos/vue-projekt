@@ -15,8 +15,8 @@
         </template>
       </app-card>
     </ul>
-    <button v-on:click="goback()">go back</button>
-    <button v-on:click="getPost()">lode next posts</button>
+    <button v-on:click="goback()">last page</button>
+    <button v-on:click="getPost()">next page</button>
   </div>
 </template>
 <script lang="ts">
@@ -64,8 +64,8 @@ export default defineComponent({
     edit: function (titel: string, body: string, id: number) {
       router.push({
         path: "/",
-        name: "new_post",
-        state: {
+        //name: "new_post",
+        query: {
           titel: titel,
           body: body,
           id: id,
@@ -79,7 +79,6 @@ export default defineComponent({
     fetch("https://jsonplaceholder.typicode.com/posts?_page=1")
       .then((response) => response.json())
       .then((data) => (this.postes = data));
-    console.log(this.postes);
   },
 });
 </script>
