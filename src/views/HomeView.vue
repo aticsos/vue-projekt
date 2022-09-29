@@ -2,26 +2,21 @@
   <div class="app">
     <Toast position="top-right" />
     <form>
-      <app-InputText
-        v-model="pst.titel"
-        type="text"
-        placeholder="Enter Titel"
-      />
+      <p style="color: white">Enter Title:</p>
+      <app-InputText v-model="pst.titel" type="text" />
+      <p></p>
+      <p style="color: white">Enter Text:</p>
       <p>
-        <app-InputText
-          v-model="pst.body"
-          type="text"
-          placeholder="Enter Text"
-        />
+        <app-InputText v-model="pst.body" type="text" />
       </p>
+      <p style="color: white">Enter User Id:</p>
       <p>
         <!--onkeypress prevents any non number to be entert, if you are editing a post you can't change id-->
         <app-Input
           v-if="edit != 0"
-          v-model="pst.id"
+          v-model="pst.userId"
           type="text"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-          placeholder="Enter ID"
         />
       </p>
       <!--if edit is not the case call postData(uses post) if edit is activ call editPost(uses put)-->
@@ -44,7 +39,7 @@ export default defineComponent({
   data() {
     return {
       //post data type
-      pst: { userId: 1, titel: "", body: "", id: 0 } as post,
+      pst: { userId: 0, titel: "", body: "", id: 1 } as post,
       //variabel to check wether you are makeing a new post or editing a post
       edit: 1,
     };
@@ -58,10 +53,8 @@ export default defineComponent({
     if (typeof this.$route.query.body === "string") {
       this.pst.body = this.$route.query.body;
     }
-    if (typeof this.$route.query.id === "number") {
-      this.pst.id = this.$route.query.id;
-    }
     //a special case because type of won't work
+    this.pst.id = Number(this.$route.query.id);
     this.edit = Number(this.$route.query.edit);
   },
   methods: {
@@ -73,7 +66,7 @@ export default defineComponent({
         body: JSON.stringify({
           title: this.pst.titel,
           body: this.pst.body,
-          userId: this.pst.id,
+          userId: this.pst.userId,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -102,7 +95,7 @@ export default defineComponent({
         body: JSON.stringify({
           title: this.pst.titel,
           body: this.pst.body,
-          userId: this.pst.id,
+          userId: this.pst.userId,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",

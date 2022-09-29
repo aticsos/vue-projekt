@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/">new post</router-link> |
-    <router-link to="/all_post">all</router-link>
+    <router-link to="/all_post">all posts</router-link>
   </nav>
   <router-view />
 </template>
