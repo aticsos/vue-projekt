@@ -39,7 +39,7 @@ export default defineComponent({
   data() {
     return {
       //post data type
-      pst: { userId: 0, titel: "", body: "", id: 1 } as post,
+      pst: {} as post,
       //variabel to check wether you are makeing a new post or editing a post
       edit: 1,
     };
