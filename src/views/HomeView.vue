@@ -9,7 +9,7 @@
       <p>
         <app-InputText v-model="pst.body" type="text" />
       </p>
-      <p style="color: white">Enter User Id:</p>
+      <p style="color: white" v-if="edit != 0">Enter User Id:</p>
       <p>
         <!--onkeypress prevents any non number to be entert, if you are editing a post you can't change id-->
         <app-Input
@@ -45,6 +45,7 @@ export default defineComponent({
     };
   },
   created() {
+    //make the backround black for better constrast
     document.body.style.backgroundColor = "black";
     //get data from url query and check if it is the rigth typ
     if (typeof this.$route.query.titel === "string") {
